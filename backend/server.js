@@ -52,7 +52,10 @@ app.get("/db", async (req, res) => {
     res.status(500).json({
       message: "Database error",
       error: err.message,
-      success: false
+      success: false 
+      
+      
+      
     });
   }
 });
