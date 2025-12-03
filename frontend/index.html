@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontend - TP Docker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>TP Docker Avancé</h1>
+    <h2>Frontend Statique</h2>
+    
+    <div id="api-response">Loading API data...</div>
+    <div id="db-response">Loading Database data...</div>
+  </div>
+
+  <script>
+    async function fetchData() {
+      try {
+        // Récupérer le statut de l'API
+        const apiResponse = await fetch('http://localhost:3000/api');
+        if (!apiResponse.ok) throw new Error('API request failed');
+        const apiData = await apiResponse.json();
+        document.getElementById('api-response').innerText = JSON.stringify(apiData, null, 2);
+
+        // Récupérer les données de la base
+        const dbResponse = await fetch('http://localhost:3000/db');
+        if (!dbResponse.ok) throw new Error('Database request failed');
+        const dbData = await dbResponse.json();
+        document.getElementById('db-response').innerText = JSON.stringify(dbData, null, 2);
+
+      } catch (error) {
+        const errorMsg = `Error: ${error.message}`;
+        document.getElementById('api-response').innerText = errorMsg;
+        document.getElementById('db-response').innerText = errorMsg;
+      }
+    }
+
+    // Rafraîchir toutes les 1 seconde
+    setInterval(fetchData, 1000);
+  </script>
+</body>
+</html>
