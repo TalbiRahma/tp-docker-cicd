@@ -1,0 +1,16 @@
+name: CI - Mon Premier Pipeline        # Nom du workflow
+
+on:                                     # Déclencheurs
+  push:
+    branches: [ main ]
+
+jobs:                                   # Ensemble des jobs
+  build:
+    runs-on: ubuntu-latest              # Environnement du runner
+
+    steps:                              # Liste des étapes à exécuter
+      - name: Étape 1
+        run: echo "Hello CI"
+
+      - name: Étape 2
+        run: echo "Pipeline terminé !"
